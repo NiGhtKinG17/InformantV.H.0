@@ -1,7 +1,7 @@
 import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { CubeTransparentIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import PostModal from "./PostModal";
 
 const CrimePosts = () => {
   const crimetypes = [
@@ -56,7 +56,7 @@ const CrimePosts = () => {
 
   return (
     <>
-      <div className=" rounded-lg backdrop-blur-sm bg-white/5 col-span-9  py-5 h-full">
+      <div className=" rounded-lg backdrop-blur-sm bg-white/3 col-span-9  py-5 h-full">
         {/* // Crime type Selection */}
         <div className="flex items-center  overflow-x-auto px-5 scrollbar-none space-x-4 ">
           {crimetypes.map((crime, i) => {
@@ -80,50 +80,59 @@ const CrimePosts = () => {
         </div>
 
         {/* Crime Posts */}
-        <div className="grid grid-cols-2 px-5  mt-5 h-[550px] overflow-y-auto scrollbar rounded-lg">
+        <div className="grid grid-cols-2 px-5 pt-3 mt-3 h-[550px] overflow-y-auto scrollbar rounded-lg">
           {postss.map((post) => {
             return (
-              <div
-                className={`post-card ${post % 2 != 1 && `ml-3`}`}
-                key={post}
-                onClick={() => setShowCrimeModal(true)}
-              >
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center">
-                    <div className="tag">Assault</div>
-                    <CubeTransparentIcon className="h-6 w-6 ml-auto" />
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    <h3 className="text-xl font-bold">
-                      Husband assaults his wife
-                    </h3>
-                    <p className="text-xs text-gray-500">
-                      In the city life of delhi, the stress life affecting...
-                    </p>
-                  </div>
-                </div>
+              <Link href="/crimepost/1" key={post}>
+                <div className="flex flex-nowrap space-x-3">
+                  <div
+                    className={`post-card h-[200px]  ${
+                      post % 2 != 1 && `ml-4`
+                    }`}
+                  >
+                    <div className="flex-1 space-y-3">
+                      <div className="flex items-center">
+                        <div className="tag">Assault</div>
+                        <CubeTransparentIcon className="h-6 text-gray-400 w-6 ml-auto" />
+                      </div>
+                      <div className="flex flex-col space-y-1">
+                        <h3 className="text-lg ">
+                          California bakery owner dead after armed robbery
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          A beloved Northern California bakery owner has died
+                          after being the victim of a robbery earlier this week
+                          in which she was severely injured, her family said.
+                          Jen Angel, the owner of Angel Cakes died after
+                          losing...
+                          {/* 268 Characters */}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="flex items-center">
-                  <div className="flex items-center space-x-1">
-                    <MapPinIcon className="h-5 w-5 text-yellow-green" />
-                    <p className="text-xs">Mumbai, India</p>
-                  </div>
-                  <div className="flex ml-auto items-center space-x-1 pr-2">
-                    <CalendarDaysIcon className="h-5 w-5 text-yellow-green" />
-                    <p className="text-xs">23/02/23</p>
+                    <div className="flex items-center">
+                      <div className="flex items-center space-x-1 group">
+                        <MapPinIcon className="h-5 w-5 text-gray-500 group-hover:text-white/80" />
+                        <p className="text-xs text-gray-500 group-hover:text-white/80">
+                          Mumbai, India
+                        </p>
+                      </div>
+                      <div className="flex ml-auto items-center space-x-1 pr-2 group">
+                        <CalendarDaysIcon className="h-5 w-5 text-gray-500 group-hover:text-white/80" />
+                        <p className="text-xs text-gray-500 group-hover:text-white/80">
+                          23/02/23
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
 
           {/* <div className="border border-white ml-2 mt-3">Second</div> */}
         </div>
       </div>
-      <PostModal
-        invisible={showCrimeModal}
-        onClose={() => setShowCrimeModal(false)}
-      />
     </>
   );
 };

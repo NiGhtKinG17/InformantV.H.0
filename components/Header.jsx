@@ -66,7 +66,7 @@ const Header = () => {
   }, []);
   return (
     <>
-      <header className="pt-5 flex">
+      <header className="pt-5 flex ">
         {/* Company Logo */}
         <div className="flex items-center space-x-3">
           {/* <div className="border border-white rounded-full p-1.5">

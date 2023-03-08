@@ -19,27 +19,27 @@ const NewsPost = () => {
         `https://newsapi.org/v2/everything?q=${crimeType}&language=en&apiKey=405c1d395d914266b5a6904aaf66449a`
       )
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.articles[0].description);
         setPosts(res.data.articles.slice(0, 10));
       })
       .catch((err) => console.log(err));
   }, [crimeType]);
   return (
-    <div className="rounded-lg backdrop-blur-sm bg-white/5 px-4 col-span-3 py-5">
+    <div className="rounded-lg backdrop-blur-sm bg-white/3  col-span-3 py-5">
       {/* Header Section */}
-      <div className="flex items-center">
+      <div className="flex items-center px-4">
         <div className="flex items-center space-x-2">
-          <NewspaperIcon className="h-7 w-7 text-white" />
+          <NewspaperIcon className="h-7 w-7 text-white/90" />
           <p className="bg-transparent text-2xl text-white">Latest News</p>
         </div>
 
         <Menu as="div" className="ml-auto relative">
           <Menu.Button
             as="button"
-            className="text-dark-green  group bg-yellow-green flex items-center justify-center    rounded-md py-2 px-4 outline-none "
+            className="text-dark-green  group bg-yellow-green flex items-center justify-center rounded-md py-2 px-4 outline-none "
           >
             <p className="text-md">{selectedCrime}</p>
-            <ChevronDownIcon className="h-5 w-5 ml-2 transition-all  ease-out group-hover:rotate-[360deg] " />
+            <ChevronDownIcon className="h-5 w-5 ml-2  " />
           </Menu.Button>
           <Menu.Items className="z-40 absolute right-0 w-56 mt-2 origin-top-right border border-gray-500 bg-form-gray divide-y divide-gray-600/25 rounded-md shadow-lg outline-none h-80 overflow-y-auto scrollbar border-none ">
             <div
@@ -128,7 +128,7 @@ const NewsPost = () => {
       </div>
       {/* News Section */}
 
-      <div className="h-[550px] overflow-y-auto scrollbar pb-3 rounded-lg  mt-4 space-y-3">
+      <div className="h-[550px] overflow-y-auto scrollbar pb-3 px-4 rounded-lg  mt-3 pt-1 space-y-3">
         {/* Post */}
 
         {posts.map((post, i) => {
@@ -137,13 +137,13 @@ const NewsPost = () => {
               initial={{ y: 500 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.5 + i * 0.2 }}
-              className="flex flex-col bg-black rounded-lg px-4 py-3 hover:shadow-sm  hover:shadow-yellow-green"
+              className="flex flex-col bg-[#141515]/70 rounded-lg px-4 pt-4 pb-4 hover:shadow-sm hover:-translate-x-1.5 hover:transition-all hover:ease-in-out  hover:shadow-yellow-green "
               key={post.url}
             >
               {/* News Post Header */}
               <a className="flex flex-col space-y-2" href={post.url}>
                 <div className="flex">
-                  <h1 className="text-md font-bold">{`${post.title.substring(
+                  <h1 className="text-md">{`${post.title.substring(
                     0,
                     65
                   )}...`}</h1>

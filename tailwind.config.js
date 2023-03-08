@@ -16,6 +16,12 @@ module.exports = {
         "form-gray": "#282929",
         "input-black": "#1b1a1b",
       },
+      opacity: {
+        3: ".03",
+      },
+      scale: {
+        103: "1.03",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
