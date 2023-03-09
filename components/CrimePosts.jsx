@@ -2,8 +2,8 @@ import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { CubeTransparentIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import {useWeb3Contract, useMoralis} from "react-moralis"
-import { abi, contractAddresses } from "../constants"
+import { useWeb3Contract, useMoralis } from "react-moralis";
+import { abi, contractAddresses } from "../constants";
 
 const CrimePosts = () => {
   const crimetypes = [
@@ -25,36 +25,34 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
-  const [postid, setPostid] = useState(1)
-  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis()
-    const chainId = parseInt(chainIdHex)
-    const contractAddress =
-        chainId in contractAddresses ? contractAddresses[chainId][0] : null
+  const [postid, setPostid] = useState(1);
+  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
+  const chainId = parseInt(chainIdHex);
+  const contractAddress =
+    chainId in contractAddresses ? contractAddresses[chainId][0] : null;
 
-  
-  const {runContractFunction: getPostByPostid} = useWeb3Contract({
+  const { runContractFunction: getPostByPostid } = useWeb3Contract({
     abi: abi,
     contractAddress: contractAddress,
     functionName: "getPostByPostid",
-    params: {postid: postid}
-  })
-
+    params: { postid: postid },
+  });
 
   useEffect(() => {
     if (isWeb3Enabled) {
-        updateUi()
+      updateUi();
     }
-}, [isWeb3Enabled])
+  }, [isWeb3Enabled]);
 
-let post;
+  let post;
 
-async function updateUi(){
-  for(let i=1; i<=2; i++){
-    setPostid(i)
-    post = (await getPostByPostid()).toString()
-    console.log(post)
+  async function updateUi() {
+    for (let i = 1; i <= 2; i++) {
+      setPostid(i);
+      post = (await getPostByPostid()).toString();
+      console.log(post);
+    }
   }
-}
 
   useEffect(() => {
     const hacker = (id, i) => {
@@ -119,7 +117,7 @@ async function updateUi(){
                 <div className="flex flex-nowrap space-x-3">
                   <div
                     className={`post-card h-[200px]  ${
-                      post % 2 != 1 && `ml-4`
+                      post % 2 != 1 && `ml-5`
                     }`}
                   >
                     <div className="flex-1 space-y-3">

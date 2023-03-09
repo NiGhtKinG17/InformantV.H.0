@@ -8,9 +8,10 @@ import {
   PuzzlePieceIcon,
   PlusIcon,
   PowerIcon,
+  ArrowPathRoundedSquareIcon,
 } from "@heroicons/react/24/outline";
 import FormModal from "./FormModal";
-import {ConnectButton} from "web3uikit"
+import { ConnectButton } from "web3uikit";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -100,7 +101,7 @@ const Header = () => {
           >
             <PlusIcon className="h-8 w-8 bg-transparent group-hover:rotate-180 group-hover:text-yellow-green transition-all ease-out" />
           </div>
-          <div className="bg-gray-500/30 flex items-center px-2 py-2 hover:shadow-md hover:shadow-yellow-green/50 rounded-full group">
+          <div className="flex items-center custom-connect space-x-2 rounded-full group">
             {/* <PowerIcon className="h-8 w-8 bg-transparent group-hover:text-yellow-green group-hover:-translate-y-1 transition-all ease-out" /> */}
             <ConnectButton moralisAuth={false} />
           </div>
