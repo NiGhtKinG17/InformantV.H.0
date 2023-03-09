@@ -2,12 +2,8 @@ import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { CubeTransparentIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-<<<<<<< Updated upstream
-=======
-import PostModal from "./PostModal";
 import {useWeb3Contract, useMoralis} from "react-moralis"
 import { abi, contractAddresses } from "../constants"
->>>>>>> Stashed changes
 
 const CrimePosts = () => {
   const crimetypes = [
