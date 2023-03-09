@@ -2,6 +2,12 @@ import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { CubeTransparentIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+<<<<<<< Updated upstream
+=======
+import PostModal from "./PostModal";
+import {useWeb3Contract, useMoralis} from "react-moralis"
+import { abi, contractAddresses } from "../constants"
+>>>>>>> Stashed changes
 
 const CrimePosts = () => {
   const crimetypes = [
@@ -23,6 +29,36 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
+  const [postid, setPostid] = useState(1)
+  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis()
+    const chainId = parseInt(chainIdHex)
+    const contractAddress =
+        chainId in contractAddresses ? contractAddresses[chainId][0] : null
+
+  
+  const {runContractFunction: getPostByPostid} = useWeb3Contract({
+    abi: abi,
+    contractAddress: contractAddress,
+    functionName: "getPostByPostid",
+    params: {postid: postid}
+  })
+
+
+  useEffect(() => {
+    if (isWeb3Enabled) {
+        updateUi()
+    }
+}, [isWeb3Enabled])
+
+let post;
+
+async function updateUi(){
+  for(let i=1; i<=2; i++){
+    setPostid(i)
+    post = (await getPostByPostid()).toString()
+    console.log(post)
+  }
+}
 
   useEffect(() => {
     const hacker = (id, i) => {
