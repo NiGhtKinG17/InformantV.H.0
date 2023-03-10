@@ -100,27 +100,63 @@ const NewsPost = () => {
               className=""
               onClick={() => {
                 setCrimeType("hijacking");
-                setSelectedCrime("Assault");
+                setSelectedCrime("HiJack..");
               }}
             >
               <SortByItem name="Hijacking" />
             </div>
-            <div className="" onClick={() => setCrimeType("kidnaping")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("kidnaping");
+                setSelectedCrime("Kidnap..");
+              }}
+            >
               <SortByItem name="Kidnaping" />
             </div>
-            <div className="" onClick={() => setCrimeType("prostitution")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("prostitution");
+                setSelectedCrime("prostitu..");
+              }}
+            >
               <SortByItem name="Prostitution" />
             </div>
-            <div className="" onClick={() => setCrimeType("rape")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("rape");
+                setSelectedCrime("Rape");
+              }}
+            >
               <SortByItem name="Rape" />
             </div>
-            <div className="" onClick={() => setCrimeType("robbery")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("robbery");
+                setSelectedCrime("Robbery");
+              }}
+            >
               <SortByItem name="Robbery" />
             </div>
-            <div className="" onClick={() => setCrimeType("terrorism")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("terrorism");
+                setSelectedCrime("Terrorism");
+              }}
+            >
               <SortByItem name="Terrorism" />
             </div>
-            <div className="" onClick={() => setCrimeType("theft")}>
+            <div
+              className=""
+              onClick={() => {
+                setCrimeType("theft");
+                setSelectedCrime("Theft");
+              }}
+            >
               <SortByItem name="Theft" />
             </div>
           </Menu.Items>
@@ -136,7 +172,7 @@ const NewsPost = () => {
             <motion.div
               initial={{ y: 500 }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.5 + i * 0.2 }}
+              transition={{ duration: 0.5 + i * 0.275 }}
               className="flex flex-col bg-[#141515]/70 rounded-lg px-4 pt-4 pb-4 hover:shadow-sm hover:-translate-x-1.5 hover:transition-all hover:ease-in-out  hover:shadow-yellow-green "
               key={post.url}
             >
