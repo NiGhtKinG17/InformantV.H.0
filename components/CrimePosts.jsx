@@ -25,18 +25,18 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
-  const [postid, setPostid] = useState(1)
-  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis()
+  let postid = 1
+  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis()
     const chainId = parseInt(chainIdHex)
     const contractAddress =
         chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
   
-  const {runContractFunction: getPostByPostid} = useWeb3Contract({
+  const {runContractFunction: getAllPosts} = useWeb3Contract({
     abi: abi,
     contractAddress: contractAddress,
-    functionName: "getPostByPostid",
-    params: {postid: postid}
+    functionName: "getAllPosts",
+    params:{}
   })
 
 
@@ -46,14 +46,13 @@ const CrimePosts = () => {
     }
 }, [isWeb3Enabled])
 
-let post;
+
+
 
 async function updateUi(){
-  for(let i=1; i<=2; i++){
-    setPostid(i)
-    post = (await getPostByPostid()).toString()
-    console.log(post)
-  }
+ const allPosts = (await getAllPosts()).toString()
+ const postSep = allPosts.split("|")
+  console.log(postSep)
 }
 
   useEffect(() => {

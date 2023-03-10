@@ -29,4 +29,11 @@
   }
 }
 
+.custom-connect button {
+  background-color: transparent !important;
+}
+.custom-connect button:focus {
+  outline: 0;
+}
+
 /* bg-black/80 */
