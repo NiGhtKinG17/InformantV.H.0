@@ -57,7 +57,7 @@ const TModal = ({ invisible, onClose }) => {
 
         {/* Info-Section */}
         <div className="grid grid-cols-2 flex-1 px-5 py-3 space-x-5 ">
-          <div className="bg-gray-500/3 flex flex-col rounded-lg px-4 pt-3 pb-3">
+          <div className="bg-gray-500/3 flex flex-col rounded-lg px-5 pt-4 pb-3">
             <div className="flex-1">
               <div className="">
                 <h1 className="text-2xl ">
@@ -78,40 +78,7 @@ const TModal = ({ invisible, onClose }) => {
                   feet by the vehicle and taken to a hospital with head
                   injuries. In the statement, friends and family said Angel was
                   against "state violence, carceral punishment, or
-                  incarceration." Her organs will be donated and the bakery will
-                  remain open with support from Angel's estate, the statement
-                  said. A medical team informed Angel's family that the donated
-                  organs will save the lives of up to 70 people. A beloved
-                  Northern California bakery owner has died after being the
-                  victim of a robbery earlier this week in which she was
-                  severely injured, her family said. Jen Angel, the owner of
-                  Angel Cakes died after losing all brain function, her loved
-                  ones said Thursday evening.Angel was robbed Monday near a
-                  Wells Fargo Bank, FOX San Francisco reported. She was sitting
-                  in her car when someone broke in and stole her purse. A
-                  beloved Northern California bakery owner has died after being
-                  the victim of a robbery earlier this week in which she was
-                  severely injured, her family said. Jen Angel, the owner of
-                  Angel Cakes died after losing all brain function, her loved
-                  ones said Thursday evening.Angel was robbed Monday near a
-                  Wells Fargo Bank, FOX San Francisco reported. She was sitting
-                  in her car when someone broke in and stole her purse. She
-                  chased after the thief to retrieve the bag but the suspects
-                  drove off, the report said. Angel was reportedly dragged 50
-                  feet by the vehicle and taken to a hospital with head
-                  injuries. In the statement, friends and family said Angel was
-                  against "state violence, carceral punishment, or
-                  incarceration." Her organs will be donated and the bakery will
-                  remain open with support from Angel's estate, the statement
-                  said. A medical team informed Angel's family that the donated
-                  organs will save the lives of up to 70 people. A beloved
-                  Northern California bakery owner has died after being the
-                  victim of a robbery earlier this week in which she was
-                  severely injured, her family said. Jen Angel, the owner of
-                  Angel Cakes died after losing all brain function, her loved
-                  ones said Thursday evening.Angel was robbed Monday near a
-                  Wells Fargo Bank, FOX San Francisco reported. She was sitting
-                  in her car when someone broke in and stole her purse.
+                  incarceration."
                 </p>
               </div>
             </div>
@@ -138,13 +105,13 @@ const TModal = ({ invisible, onClose }) => {
               }}
             />
             <div
-              className="hidden group-hover:block absolute top-[50%] -translate-x-0  left-5 text-2xl rounded-full p-2 bg-white/5 text-white cursor-pointer"
+              className="hidden group-hover:block absolute top-[50%] -translate-x-0  left-5 text-2xl rounded-full p-2 bg-gray-600/80 text-white cursor-pointer"
               onClick={prevSlide}
             >
               <ChevronLeftIcon className="h-7 w-7" />
             </div>
             <div
-              className="hidden group-hover:block absolute top-[50%] -translate-x-0   right-5 text-2xl rounded-full p-2 bg-white/5 text-white cursor-pointer"
+              className="hidden group-hover:block absolute top-[50%] -translate-x-0   right-5 text-2xl rounded-full p-2 bg-gray-600/80 text-white cursor-pointer"
               onClick={nextSlide}
             >
               <ChevronRightIcon className="h-7 w-7" />

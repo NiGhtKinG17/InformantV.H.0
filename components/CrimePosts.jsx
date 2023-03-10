@@ -2,8 +2,8 @@ import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { CubeTransparentIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import {useWeb3Contract, useMoralis} from "react-moralis"
-import { abi, contractAddresses } from "../constants"
+import { useWeb3Contract, useMoralis } from "react-moralis";
+import { abi, contractAddresses } from "../constants";
 
 const CrimePosts = () => {
   const crimetypes = [
@@ -25,7 +25,6 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
-  let postid = 1
   const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis()
     const chainId = parseInt(chainIdHex)
     const contractAddress =
@@ -42,11 +41,9 @@ const CrimePosts = () => {
 
   useEffect(() => {
     if (isWeb3Enabled) {
-        updateUi()
+      updateUi();
     }
-}, [isWeb3Enabled])
-
-
+  }, [isWeb3Enabled]);
 
 
 async function updateUi(){
@@ -54,6 +51,7 @@ async function updateUi(){
  const postSep = allPosts.split("|")
   console.log(postSep)
 }
+
 
   useEffect(() => {
     const hacker = (id, i) => {
@@ -118,7 +116,7 @@ async function updateUi(){
                 <div className="flex flex-nowrap space-x-3">
                   <div
                     className={`post-card h-[200px]  ${
-                      post % 2 != 1 && `ml-4`
+                      post % 2 != 1 && `ml-5`
                     }`}
                   >
                     <div className="flex-1 space-y-3">

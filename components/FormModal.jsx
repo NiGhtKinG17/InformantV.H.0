@@ -9,91 +9,104 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {useWeb3Contract, useMoralis} from "react-moralis"
-import { useNotification } from "web3uikit"
-import { abi, contractAddresses } from "../constants"
+import { useWeb3Contract, useMoralis } from "react-moralis";
+import { useNotification } from "web3uikit";
+import { abi, contractAddresses } from "../constants";
 
 const FormModal = ({ invisible, onClose }) => {
   if (!invisible) return null;
 
+  const crimetypes = [
+    "Assault",
+    "Bribery",
+    "Extortion",
+    "Fraud",
+    "Hijaking",
+    "Kidnaping",
+    "Prostitution",
+    "Rape",
+    "Robbery",
+    "Terrorism",
+    "Theft",
+  ];
+
   const date = new Date();
   const [startDate, setStartDate] = useState(date);
-  const [title, setTitle] = useState("")
-  const [crimeType, setCrimeType] = useState("")
-  const [desc, setDesc] = useState("")
-  const [location, setLocation] = useState("")
-  const [owner, setOwner] = useState("")
-  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis()
-    const chainId = parseInt(chainIdHex)
-    const contractAddress =
-        chainId in contractAddresses ? contractAddresses[chainId][0] : null
-        const {
-          runContractFunction: addPost,
-        isFetching,
-        isLoading,
-      } = useWeb3Contract({
-          abi: abi,
-          contractAddress: contractAddress,
-          functionName: "addPost",
-          params: {
-            _title: title,
-            _crimeType: crimeType,
-            _description: desc,
-            _timeStamp: startDate.toString(),
-            _location: location
-          }
-      })
+  const [title, setTitle] = useState("");
+  const [crimeType, setCrimeType] = useState("");
+  const [desc, setDesc] = useState("");
+  const [location, setLocation] = useState("");
+  const [owner, setOwner] = useState("");
+  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
+  const chainId = parseInt(chainIdHex);
+  const contractAddress =
+    chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+  const {
+    runContractFunction: addPost,
+    isFetching,
+    isLoading,
+  } = useWeb3Contract({
+    abi: abi,
+    contractAddress: contractAddress,
+    functionName: "addPost",
+    params: {
+      _title: title,
+      _crimeType: crimeType,
+      _description: desc,
+      _timeStamp: startDate.toString(),
+      _location: location,
+    },
+  });
 
-        const handleTitleChange = (event) => {
-          setTitle(event.target.value)
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+  const handleCrimeTypeChange = (event) => {
+    setCrimeType(event.target.value);
+  };
+  const handleDescChange = (event) => {
+    setDesc(event.target.value);
+  };
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
+  const dispatch = useNotification();
+  const handleSuccess = async function (tx) {
+    await tx.wait(1);
+    handleNewNotification(tx);
+    window.location.reload(false);
+  };
+  const handleNewNotification = function () {
+    dispatch({
+      type: "info",
+      message: "Transaction Complete",
+      title: "Tx Notification",
+      position: "topR",
+      icon: "🔔",
+    });
+  };
+
+  const handleClick = () => {
+    try {
+      async function func() {
+        await addPost({
+          onSuccess: handleSuccess,
+          onError: (e) => console.log(e),
+        });
       }
-      const handleCrimeTypeChange = (event) => {
-        setCrimeType(event.target.value)
+      func();
+    } catch (e) {
+      windows.alert(e);
     }
-    const handleDescChange = (event) => {
-      setDesc(event.target.value)
-    }
-    const handleLocationChange = (event) => {
-      setLocation(event.target.value)
-    }
-    const dispatch = useNotification()
-    const handleSuccess = async function (tx) {
-        await tx.wait(1)
-        handleNewNotification(tx)
-        window.location.reload(false)
-    }
-    const handleNewNotification = function () {
-        dispatch({
-            type: "info",
-            message: "Transaction Complete",
-            title: "Tx Notification",
-            position: "topR",
-            icon: "🔔",
-        })
-    }
+  };
 
-    const handleClick = () => {
-      try{
-        async function func() {
-          await addPost({
-            onSuccess: handleSuccess,
-            onError: (e) => console.log(e),
-        })
-        }
-        func()
-      }catch(e){
-        windows.alert(e)
-      }
-    }
+  async function updateUi() {}
 
-    async function updateUi(){
+  useEffect(() => {
+    if (isWeb3Enabled) {
+      updateUi();
     }
-
-    useEffect(() => {
-      if (isWeb3Enabled) {
-          updateUi()
-      }
-  }, [isWeb3Enabled])
+  }, [isWeb3Enabled]);
 
   return (
     <div
@@ -146,12 +159,21 @@ const FormModal = ({ invisible, onClose }) => {
               </label>
             </div>
             <div className="flex">
-              <input
-                type="text"
-                placeholder="Crime type"
-                className="flex-1  bg-input-black outline-none text-white text-md  p-1.5 rounded-md  px-2.5"
-                onChange={handleCrimeTypeChange}
-              />
+              <select
+                className="flex-1  bg-input-black outline-none text-white/50 text-md  p-2 rounded-md px-1.5"
+                id=""
+              >
+                <option selected className="text-white">
+                  Crime type
+                </option>
+                {crimetypes.map((type) => {
+                  return (
+                    <option key="type" className="text-white">
+                      {type}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           {/* Crime Description */}
