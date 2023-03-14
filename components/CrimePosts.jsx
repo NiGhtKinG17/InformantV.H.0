@@ -49,7 +49,6 @@ const CrimePosts = () => {
 async function updateUi(){
  const allPosts = (await getAllPosts()).toString()
  const postSep = allPosts.split("|")
-  console.log(postSep)
 }
 
 

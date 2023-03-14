@@ -61,7 +61,7 @@ const FormModal = ({ invisible, onClose }) => {
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
-  const handleCrimeTypeChange = (event) => {
+  const handleCrimeType = (event) => {
     setCrimeType(event.target.value);
   };
   const handleDescChange = (event) => {
@@ -151,8 +151,24 @@ const FormModal = ({ invisible, onClose }) => {
             </div>
           </div>
 
-          {/* Crime Type */}
           <div className="flex flex-col space-y-2">
+            <div className="">
+              <label htmlFor="" className="">
+                Type
+              </label>
+            </div>
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Crime title"
+                className="flex-1  bg-input-black outline-none text-white text-md  p-1.5 rounded-md px-2.5"
+                onChange={handleCrimeType}
+              />
+            </div>
+          </div>
+
+          {/* Crime Type */}
+          {/* <div className="flex flex-col space-y-2">
             <div className="">
               <label htmlFor="" className="">
                 Type
@@ -168,14 +184,14 @@ const FormModal = ({ invisible, onClose }) => {
                 </option>
                 {crimetypes.map((type) => {
                   return (
-                    <option key="type" className="text-white">
+                    <option key="type" onChange={() => handleCrimeType()} className="text-white">
                       {type}
                     </option>
                   );
                 })}
               </select>
             </div>
-          </div>
+          </div> */}
           {/* Crime Description */}
           <div className="flex flex-col space-y-2">
             <div className="">

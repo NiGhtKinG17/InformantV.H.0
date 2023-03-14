@@ -9,12 +9,80 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useWeb3Contract, useMoralis } from "react-moralis";
+import { useNotification } from "web3uikit";
+import { abi, contractAddresses } from "../constants";
 
-const TFormModal = ({ invisible, onClose }) => {
+const TFormModal = ({ invisible, onClose, postid }) => {
   if (!invisible) return null;
 
   const date = new Date();
   const [startDate, setStartDate] = useState(date);
+  const [title, setTitle] = useState("")
+  const [desc, setDesc] = useState("")
+  const [location, setLocation] = useState("")
+  const [buttonStat, setButtonStat] = useState("Submit")
+  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis()
+    const chainId = parseInt(chainIdHex)
+    const contractAddress =
+        chainId in contractAddresses ? contractAddresses[chainId][0] : null
+        const {
+          runContractFunction: addTestimony,
+          isFetching,
+          isLoading,
+        } = useWeb3Contract({
+          abi: abi,
+          contractAddress: contractAddress,
+          functionName: "addTestimony",
+          params: {
+            testimonyTitle: title,
+            testimonyDesc: desc,
+            testimonyTimeStamp: startDate.toString(),
+            testimonyLocation: location,
+            postid: postid,
+          },
+          msgValue: "5000000000000000"
+        });
+        const handleTitleChange = (event) => {
+          setTitle(event.target.value);
+        };
+        const handleDescChange = (event) => {
+          setDesc(event.target.value);
+        };
+        const handleLocationChange = (event) => {
+          setLocation(event.target.value);
+        };
+        const dispatch = useNotification();
+  const handleSuccess = async function (tx) {
+    await tx.wait(1);
+    handleNewNotification(tx);
+    window.location.reload(false);
+  };
+  const handleNewNotification = function () {
+    dispatch({
+      type: "info",
+      message: "Transaction Complete",
+      title: "Tx Notification",
+      position: "topR",
+      icon: "🔔",
+    });
+  };
+
+  const handleClick = () => {
+    try {
+      async function func() {
+        setButtonStat("Wait")
+        await addTestimony({
+          onSuccess: handleSuccess,
+          onError: (e) => console.log(e),
+        });
+      }
+      func();
+    } catch (e) {
+      windows.alert(e);
+    }
+  };
+
   return (
     <div
       className="z-50 fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center rounded-md"
@@ -53,7 +121,7 @@ const TFormModal = ({ invisible, onClose }) => {
                 type="text"
                 placeholder="Crime title"
                 className="flex-1  bg-input-black outline-none text-white text-md  p-1.5 rounded-md px-2.5"
-                // onChange={handleTitleChange}
+                onChange={handleTitleChange}
               />
             </div>
           </div>
@@ -68,7 +136,7 @@ const TFormModal = ({ invisible, onClose }) => {
                 type="text"
                 placeholder="Crime description"
                 className="flex-1 bg-input-black outline-none text-white text-md  p-1.5 rounded-md  scrollbar-thin scrollbar-thumb-gray-500/50 scrollbar-track-input-black scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-2.5"
-                // onChange={handleDescChange}
+                onChange={handleDescChange}
               />
             </div>
           </div>
@@ -99,7 +167,7 @@ const TFormModal = ({ invisible, onClose }) => {
                 type="text"
                 placeholder="Crime location"
                 className="flex-1  bg-input-black outline-none text-white text-md  p-1.5 px-2.5 rounded-md "
-                // onChange={handleLocationChange}
+                onChange={handleLocationChange}
               />
             </div>
           </div>
@@ -119,9 +187,9 @@ const TFormModal = ({ invisible, onClose }) => {
       </div> */}
           <button
             className="w-full bg-black  text-white px-7 py-2 hover:bg-dark-green hover:text-yellow-green hover:shadow-lg rounded-md flex items-center justify-center group"
-            // onClick={handleClick}
+            onClick={handleClick}
           >
-            <p>Post</p>
+            <p>{buttonStat}</p>
             <ArrowPathRoundedSquareIcon className="h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:rotate-180 " />
           </button>
         </div>

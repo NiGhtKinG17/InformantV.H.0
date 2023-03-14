@@ -13,7 +13,7 @@ import image1 from "../public/theft.jpg";
 import image2 from "../public/gun.jpg";
 import TFormModal from "./TFormModal";
 
-const CrimeMain = () => {
+const CrimeMain = ({postid}) => {
   const crimetypes = [
     "Assault",
     "Extortion",
@@ -109,7 +109,7 @@ const CrimeMain = () => {
           </div>
         </div>
       </div>
-      <TFormModal invisible={showModal} onClose={() => setShowModal(false)} />
+      <TFormModal invisible={showModal} onClose={() => setShowModal(false)} postid={postid} />
     </>
   );
 };
