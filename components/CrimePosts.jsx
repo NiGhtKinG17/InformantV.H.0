@@ -25,19 +25,18 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
-  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis()
-    const chainId = parseInt(chainIdHex)
-    const contractAddress =
-        chainId in contractAddresses ? contractAddresses[chainId][0] : null
+  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis();
+  const chainId = parseInt(chainIdHex);
+  const contractAddress =
+    chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+  let flag = 0;
 
-  
-  const {runContractFunction: getAllPosts} = useWeb3Contract({
+  const { runContractFunction: getAllPosts } = useWeb3Contract({
     abi: abi,
     contractAddress: contractAddress,
     functionName: "getAllPosts",
-    params:{}
-  })
-
+    params: {},
+  });
 
   useEffect(() => {
     if (isWeb3Enabled) {
@@ -45,12 +44,49 @@ const CrimePosts = () => {
     }
   }, [isWeb3Enabled]);
 
+  let allposts = [[]];
+  const [posts, setPosts] = useState([[]]);
+  const [dataloading, setDataLoading] = useState(true);
+  let postSep = [];
+  async function updateUi() {
+    const allPosts = (await getAllPosts()).toString();
+    flag = 1;
+    console.log(allPosts);
+    postSep = allPosts.split("|");
+    // console.log(postSep);
+    let temp = [[]];
 
-async function updateUi(){
- const allPosts = (await getAllPosts()).toString()
- const postSep = allPosts.split("|")
-}
+    for (let i = 0; i < postSep.length - 1; i++) {
+      // console.log(postSep[i].split("~,"));
+      temp.push(postSep[i].split("~,"));
+    }
 
+    allposts = temp;
+
+    if (allposts.length > 0) {
+      setDataLoading(false);
+      console.log(allposts);
+      setPosts(allposts);
+    }
+
+    // console.log("Latest Arra");
+
+    // console.log(postSep[0].split("~,"));
+  }
+
+  console.log("Posts");
+  console.log(posts);
+
+  for (let i = 1; i < posts.length; i++) {
+    if (i == 1) {
+      posts[1][0] = "1";
+      posts[1][5] = posts[1][5].substring(0, posts[1][5].length - 1);
+    } else {
+      posts[i][0] = posts[i][0].substring(1, posts[i][0].length - 1);
+      posts[i][5] = posts[i][5].substring(0, posts[i][5].length - 1);
+    }
+  }
+  console.log(posts);
 
   useEffect(() => {
     const hacker = (id, i) => {
@@ -69,7 +105,7 @@ async function updateUi(){
           .join("");
 
         if (iterations >= eleName.dataset.value.length) {
-          console.log(document.getElementById(id).innerText);
+          // console.log(document.getElementById(id).innerText);
           clearInterval(interval);
         }
 

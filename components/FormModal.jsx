@@ -150,8 +150,24 @@ const FormModal = ({ invisible, onClose }) => {
               />
             </div>
           </div>
-
           <div className="flex flex-col space-y-2">
+            <div className="">
+              <label htmlFor="" className="">
+                Type
+              </label>
+            </div>
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Crime Type"
+                className="flex-1  bg-input-black outline-none text-white text-md  p-1.5 rounded-md px-2.5"
+                onChange={handleCrimeTypeChange}
+              />
+            </div>
+          </div>
+
+          {/* Crime Type */}
+          {/* <div className="flex flex-col space-y-2">
             <div className="">
               <label htmlFor="" className="">
                 Type
@@ -184,7 +200,11 @@ const FormModal = ({ invisible, onClose }) => {
                 </option>
                 {crimetypes.map((type) => {
                   return (
-                    <option key="type" onChange={() => handleCrimeType()} className="text-white">
+                    <option
+                      key="type"
+                      onClick={() => setCrimeType(type)}
+                      className="text-white"
+                    >
                       {type}
                     </option>
                   );
