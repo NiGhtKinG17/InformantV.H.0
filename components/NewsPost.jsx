@@ -19,7 +19,7 @@ const NewsPost = () => {
         `https://newsapi.org/v2/everything?q=${crimeType}&language=en&apiKey=405c1d395d914266b5a6904aaf66449a`
       )
       .then((res) => {
-        // console.log(res.data.articles[0].description);
+        console.log(res.data.articles[0].description);
         setPosts(res.data.articles.slice(0, 10));
       })
       .catch((err) => console.log(err));

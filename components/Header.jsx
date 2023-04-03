@@ -34,7 +34,7 @@ const Header = () => {
           .join("");
 
         if (iterations >= event.target.dataset.value.length) {
-          // console.log(document.getElementById("company").innerHTML);
+          console.log(document.getElementById("company").innerHTML);
           clearInterval(interval);
         }
 
@@ -59,6 +59,7 @@ const Header = () => {
         .join("");
 
       if (iterations >= eleName.dataset.value.length) {
+        console.log(document.getElementById("company").innerText);
         clearInterval(interval);
       }
 
@@ -102,7 +103,7 @@ const Header = () => {
           </div>
           <div className="flex items-center custom-connect space-x-2 rounded-full group">
             {/* <PowerIcon className="h-8 w-8 bg-transparent group-hover:text-yellow-green group-hover:-translate-y-1 transition-all ease-out" /> */}
-            <ConnectButton moralisAuth={false} theme="secondary" />
+            <ConnectButton moralisAuth={false} theme="secondary"/>
           </div>
         </div>
       </header>
