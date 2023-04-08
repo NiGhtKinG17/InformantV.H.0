@@ -25,18 +25,19 @@ const CrimePosts = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [keepSelected, setKeepSelected] = useState(0);
   const [showCrimeModal, setShowCrimeModal] = useState(false);
-  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis();
-  const chainId = parseInt(chainIdHex);
-  const contractAddress =
-    chainId in contractAddresses ? contractAddresses[chainId][0] : null;
-  let flag = 0;
+  const { chainId: chainIdHex, isWeb3Enabled, account } = useMoralis()
+    const chainId = parseInt(chainIdHex)
+    const contractAddress =
+        chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
-  const { runContractFunction: getAllPosts } = useWeb3Contract({
+  
+  const {runContractFunction: getAllPosts} = useWeb3Contract({
     abi: abi,
     contractAddress: contractAddress,
     functionName: "getAllPosts",
-    params: {},
-  });
+    params:{}
+  })
+
 
   useEffect(() => {
     if (isWeb3Enabled) {
@@ -44,6 +45,7 @@ const CrimePosts = () => {
     }
   }, [isWeb3Enabled]);
 
+<<<<<<< HEAD
   let allposts = [[]];
   const [posts, setPosts] = useState([[]]);
   const [dataloading, setDataLoading] = useState(true);
@@ -71,10 +73,16 @@ const CrimePosts = () => {
     }
 
     // console.log("Latest Arra");
+=======
+>>>>>>> e962092b7e83364e96d212e6a1ee6a01329685f8
 
-    // console.log(postSep[0].split("~,"));
-  }
+async function updateUi(){
+ const allPosts = (await getAllPosts()).toString()
+ const postSep = allPosts.split("|")
+  console.log(postSep)
+}
 
+<<<<<<< HEAD
   console.log("Posts");
   console.log(posts);
 
@@ -88,6 +96,8 @@ const CrimePosts = () => {
     }
   }
   console.log(posts);
+=======
+>>>>>>> e962092b7e83364e96d212e6a1ee6a01329685f8
 
   useEffect(() => {
     const hacker = (id, i) => {
@@ -106,7 +116,7 @@ const CrimePosts = () => {
           .join("");
 
         if (iterations >= eleName.dataset.value.length) {
-          // console.log(document.getElementById(id).innerText);
+          console.log(document.getElementById(id).innerText);
           clearInterval(interval);
         }
 
