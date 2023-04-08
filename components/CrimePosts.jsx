@@ -79,9 +79,9 @@ const CrimePosts = () => {
   console.log(posts);
 
   for (let i = 0; i < posts.length; i++) {
-    if (i == 0) {
+    if (i == 1) {
       posts[0][0] = "1";
-      posts[0][5] = posts[1][5].substring(0, posts[1][5].length - 1);
+      posts[0][5] = posts[0][5].substring(0, posts[0][5].length - 1);
     } else {
       posts[i][0] = posts[i][0].substring(1, posts[i][0].length - 1);
       posts[i][5] = posts[i][5].substring(0, posts[i][5].length - 1);
